@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<body style="width: 500px;height: 1500px;background-color: rgb(255, 255, 255);overflow: hidden;">
+    
+    <div style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(53, 138, 223,0.7);width: 30%;height: 80%;margin: auto;border-radius: 100px;">
+        <span style="color: aliceblue;margin-top: 10%;display: inline-block;margin-left: 10%;font-size: 20px;">你好,欢迎登录</span>
+        <div style="width: 80%;height: 80%;background-color: aliceblue;margin-top: 5%;margin-left: 10%;border-radius: 100px;box-shadow: 0px 0px 5px red;">
+            <input type="text" id="School" placeholder="输入学校名称" style="width: 70%;margin-left: 10%;margin-top: 20%;height: 6%;"><br>
+            <input type="text" id="user_name" placeholder="请输入用户名" style="width: 70%;margin-left: 10%;margin-top: 10%;height: 6%;"><br>
+            <input type="password" id="user_mm" placeholder="请输入密码" style="width: 70%;margin-left: 10%;margin-top: 10%;height: 6%;"><br>
+            <input type="text" id="yzm" placeholder="请输入验证码" style="width: 40%;margin-left: 10%;margin-top: 10%;height: 6%;">
+            <img id="img" src="" alt="" style="position: absolute;top: 65.5%;margin-left: 7%;">
+            <button style="position: absolute;top: 80%;width: 40%;height: 10%;left: 30%;background-color: rgba(8, 105, 240,0.4);border: none;border-radius: 100px;" onclick="login()">登录</button>
+        </div>
+    </div>
+    <script>
+        img = document.getElementById("img")
+        now = Date.now()
+        img.setAttribute("src",`https://weiban.mycourse.cn/pharos/login/randLetterImage.do?time=${now}`)
+        function login(){
+            School = document.getElementById("School").value
+            user_name = document.getElementById("user_name").value
+            user_mm = document.getElementById("user_mm").value
+            yzm = document.getElementById("yzm").value
+            axios({
+              method: 'POST',
+              data:{
+                  School:School,
+                  user_name:user_name,
+                  user_mm:user_mm,
+                  yzm:yzm,
+                  now:now
+              },
+              url: 'http://127.0.0.1:5000/Shu',
+            })
+              .then(function (res) {
+                console.log(res)
+              });
+        }
+    </script>
+</body>
+</html>
